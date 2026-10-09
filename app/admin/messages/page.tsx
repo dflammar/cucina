@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useCallback } from "react";
 import { createClient } from "@/lib/supabase/client";
-import { RefreshCw, CheckCheck, Eye } from "lucide-react";
+import { RefreshCw, CheckCheck, Eye, Download } from "lucide-react";
 import { formatDate } from "@/lib/utils";
 
 type Message = {
@@ -16,9 +16,9 @@ type Message = {
 };
 
 const statusConfig = {
-  new: { label: "جديد", bg: "bg-gold/10 text-gold" },
-  read: { label: "مقروء", bg: "bg-blue-50 text-blue-600" },
-  replied: { label: "تمت الإجابة", bg: "bg-green-50 text-green-600" },
+  new: { label: "New", bg: "bg-gold/10 text-gold" },
+  read: { label: "Read", bg: "bg-blue-50 text-blue-600" },
+  replied: { label: "Replied", bg: "bg-green-50 text-green-600" },
 };
 
 export default function MessagesAdminPage() {
@@ -53,6 +53,29 @@ export default function MessagesAdminPage() {
     }
   };
 
+  const exportToCSV = () => {
+    if (messages.length === 0) return;
+    const headers = ["Date", "Name", "Phone", "Service", "Status", "Message"];
+    const rows = messages.map(m => [
+      new Date(m.created_at).toLocaleDateString(),
+      `"${m.name}"`,
+      `"${m.phone}"`,
+      `"${m.service || "N/A"}"`,
+      `"${m.status}"`,
+      `"${m.message.replace(/"/g, '""').replace(/\n/g, " ")}"` // escape quotes and newlines
+    ]);
+    
+    const csvContent = [headers.join(","), ...rows.map(r => r.join(","))].join("\n");
+    const blob = new Blob([csvContent], { type: "text/csv;charset=utf-8;" });
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement("a");
+    link.href = url;
+    link.setAttribute("download", `cucina_messages_${new Date().toISOString().split("T")[0]}.csv`);
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  };
+
   const filtered =
     filterStatus === "all"
       ? messages
@@ -65,39 +88,49 @@ export default function MessagesAdminPage() {
       {/* Header */}
       <div className="flex items-center justify-between mb-10">
         <div>
-          <h1 className="text-3xl font-black text-brand-black">رسائل العملاء</h1>
-          <p className="text-brand-mid-grey font-light mt-2">
-            {messages.length} رسالة إجمالاً
+          <h1 className="text-3xl font-black text-charcoal">Messages</h1>
+          <p className="text-charcoal-light font-light mt-2">
+            {messages.length} total messages
             {newCount > 0 && (
-              <span className="mr-2 px-2 py-0.5 bg-gold/10 text-gold text-xs font-bold rounded-full">
-                {newCount} جديدة
+              <span className="ml-3 px-2 py-0.5 bg-gold/10 text-gold text-xs font-bold rounded-full">
+                {newCount} new
               </span>
             )}
           </p>
         </div>
-        <button
-          onClick={fetchMessages}
-          className="p-2.5 border border-gray-200 text-gray-500 hover:border-gold hover:text-gold transition-all duration-300"
-        >
-          <RefreshCw size={18} />
-        </button>
+        <div className="flex gap-3">
+          <button
+            onClick={exportToCSV}
+            disabled={messages.length === 0}
+            className="flex items-center gap-2 px-4 py-2.5 bg-cream-dark text-charcoal border border-cream-mid font-semibold hover:border-charcoal hover:bg-cream transition-all duration-300 text-sm disabled:opacity-50"
+          >
+            <Download size={16} />
+            Export CSV
+          </button>
+          <button
+            onClick={fetchMessages}
+            className="p-2.5 border border-cream-mid text-charcoal hover:border-gold hover:text-gold transition-all duration-300 bg-white"
+          >
+            <RefreshCw size={18} />
+          </button>
+        </div>
       </div>
 
       {/* Status Filter */}
       <div className="flex gap-2 mb-6 flex-wrap">
         {[
-          { value: "all", label: "الكل" },
-          { value: "new", label: "جديد" },
-          { value: "read", label: "مقروء" },
-          { value: "replied", label: "تمت الإجابة" },
+          { value: "all", label: "All" },
+          { value: "new", label: "New" },
+          { value: "read", label: "Read" },
+          { value: "replied", label: "Replied" },
         ].map((f) => (
           <button
             key={f.value}
             onClick={() => setFilterStatus(f.value)}
             className={`px-4 py-2 text-xs font-bold border transition-all duration-200 ${
               filterStatus === f.value
-                ? "bg-brand-black text-gold border-brand-black"
-                : "border-gray-200 text-gray-500 hover:border-brand-black hover:text-brand-black"
+                ? "bg-charcoal text-gold border-charcoal"
+                : "border-cream-mid text-charcoal hover:border-charcoal bg-white"
             }`}
           >
             {f.label}
@@ -111,13 +144,13 @@ export default function MessagesAdminPage() {
           {loading ? (
             <div className="space-y-3">
               {[1, 2, 3].map((i) => (
-                <div key={i} className="h-20 bg-gray-100 animate-pulse" />
+               <div key={i} className="h-24 bg-cream-mid animate-pulse rounded-md" />
               ))}
             </div>
           ) : filtered.length === 0 ? (
-            <div className="text-center py-12 bg-white border border-gray-100">
-              <p className="text-brand-mid-grey font-light text-sm">
-                لا توجد رسائل
+            <div className="text-center py-12 bg-white border border-cream-mid rounded-md">
+              <p className="text-charcoal-light font-light text-sm">
+                No messages found.
               </p>
             </div>
           ) : (
@@ -128,26 +161,26 @@ export default function MessagesAdminPage() {
                   setActiveMessage(msg);
                   if (msg.status === "new") updateStatus(msg.id, "read");
                 }}
-                className={`p-4 bg-white border cursor-pointer transition-all duration-200 hover:border-gold ${
+                className={`p-4 bg-white border cursor-pointer transition-all duration-200 hover:border-gold rounded-md ${
                   activeMessage?.id === msg.id
                     ? "border-gold shadow-sm"
-                    : "border-gray-100"
-                } ${msg.status === "new" ? "border-r-4 border-r-gold" : ""}`}
+                    : "border-cream-mid"
+                } ${msg.status === "new" ? "border-l-4 border-l-gold" : ""}`}
               >
                 <div className="flex items-center justify-between gap-2 mb-1">
-                  <p className="font-bold text-brand-black text-sm">{msg.name}</p>
+                  <p className="font-bold text-charcoal text-sm">{msg.name}</p>
                   <span
-                    className={`px-2 py-0.5 text-xs font-bold rounded-full ${
+                    className={`px-2 py-0.5 text-[10px] font-bold rounded-full uppercase tracking-wider ${
                       statusConfig[msg.status].bg
                     }`}
                   >
                     {statusConfig[msg.status].label}
                   </span>
                 </div>
-                <p className="text-brand-mid-grey text-xs font-light truncate">
+                <p className="text-charcoal-light text-xs font-light truncate">
                   {msg.message}
                 </p>
-                <p className="text-gray-300 text-xs mt-1.5">
+                <p className="text-charcoal/40 text-[10px] mt-2 font-medium">
                   {formatDate(msg.created_at)}
                 </p>
               </div>
@@ -158,10 +191,10 @@ export default function MessagesAdminPage() {
         {/* Message Detail */}
         <div className="lg:col-span-2">
           {activeMessage ? (
-            <div className="bg-white border border-gray-100 p-8 h-full">
+            <div className="bg-white border border-cream-mid p-8 h-full rounded-md shadow-sm">
               <div className="flex items-start justify-between gap-4 mb-8">
                 <div>
-                  <h2 className="font-black text-xl text-brand-black mb-1">
+                  <h2 className="font-black text-xl text-charcoal mb-1">
                     {activeMessage.name}
                   </h2>
                   <a
@@ -173,7 +206,7 @@ export default function MessagesAdminPage() {
                   </a>
                 </div>
                 <span
-                  className={`px-3 py-1 text-xs font-bold rounded-full ${
+                  className={`px-3 py-1 text-xs font-bold rounded-full uppercase tracking-widest ${
                     statusConfig[activeMessage.status].bg
                   }`}
                 >
@@ -182,53 +215,53 @@ export default function MessagesAdminPage() {
               </div>
 
               {activeMessage.service && (
-                <div className="mb-5 p-4 bg-brand-light-grey">
-                  <p className="text-xs font-bold text-brand-mid-grey mb-1">
-                    الخدمة المطلوبة
+                <div className="mb-6 p-4 bg-cream-dark rounded-md">
+                  <p className="text-[10px] font-bold text-charcoal-light uppercase tracking-widest mb-1">
+                    Requested Service
                   </p>
-                  <p className="font-bold text-brand-black">
+                  <p className="font-bold text-charcoal">
                     {activeMessage.service}
                   </p>
                 </div>
               )}
 
               <div className="mb-8">
-                <p className="text-xs font-bold text-brand-mid-grey mb-3">
-                  الرسالة
+                <p className="text-[10px] font-bold text-charcoal-light uppercase tracking-widest mb-3">
+                  Message Content
                 </p>
-                <p className="text-brand-black font-light leading-[2] whitespace-pre-wrap">
+                <p className="text-charcoal font-light leading-relaxed whitespace-pre-wrap">
                   {activeMessage.message}
                 </p>
               </div>
 
-              <div className="flex items-center justify-between pt-6 border-t border-gray-100">
-                <p className="text-gray-400 text-xs">
+              <div className="flex items-center justify-between pt-6 border-t border-cream-mid">
+                <p className="text-charcoal-light text-xs font-medium">
                   {formatDate(activeMessage.created_at)}
                 </p>
                 <div className="flex gap-2">
                   <button
                     onClick={() => updateStatus(activeMessage.id, "read")}
                     disabled={activeMessage.status === "read"}
-                    className="flex items-center gap-2 px-4 py-2 border border-blue-200 text-blue-600 text-xs font-bold hover:bg-blue-50 disabled:opacity-40 transition-all duration-200"
+                    className="flex items-center gap-2 px-4 py-2 border border-blue-200 text-blue-600 text-xs font-bold hover:bg-blue-50 disabled:opacity-40 transition-all duration-200 rounded"
                   >
                     <Eye size={14} />
-                    مقروء
+                    Mark as Read
                   </button>
                   <button
                     onClick={() => updateStatus(activeMessage.id, "replied")}
                     disabled={activeMessage.status === "replied"}
-                    className="flex items-center gap-2 px-4 py-2 bg-gold text-brand-black text-xs font-bold hover:bg-gold-light disabled:opacity-40 transition-all duration-200"
+                    className="flex items-center gap-2 px-4 py-2 bg-gold text-white text-xs font-bold hover:bg-gold-dark disabled:opacity-40 transition-all duration-200 rounded"
                   >
                     <CheckCheck size={14} />
-                    تمت الإجابة
+                    Mark as Replied
                   </button>
                 </div>
               </div>
             </div>
           ) : (
-            <div className="bg-white border border-gray-100 h-full min-h-[300px] flex items-center justify-center">
-              <p className="text-brand-mid-grey font-light text-sm">
-                اختر رسالة لعرض تفاصيلها
+            <div className="bg-white border border-cream-mid rounded-md h-full min-h-[400px] flex items-center justify-center">
+              <p className="text-charcoal-light font-light text-sm">
+                Select a message to view details
               </p>
             </div>
           )}
