@@ -107,11 +107,14 @@ export default function Footer() {
 
       {/* Bottom bar */}
       <div className="border-t border-cream/10">
-        <div className="max-w-7xl mx-auto px-6 lg:px-10 py-5 flex flex-col sm:flex-row items-center justify-between gap-3">
+        <div className="max-w-7xl mx-auto px-6 lg:px-10 py-5 flex flex-col sm:flex-row items-center justify-between gap-4">
           <p className="text-cream/30 text-xs font-light">
             © {year} Cucina Plus. All rights reserved.
           </p>
-          <p className="text-cream/20 text-xs">
+          <p className="text-cream/30 text-xs font-light text-center">
+            Developed with ❤️ by <a href="https://wa.me/201280548656" target="_blank" rel="noopener noreferrer" className="text-blue-400 hover:text-blue-300 hover:underline transition-all duration-200 font-bold">Ammar</a>
+          </p>
+          <p className="text-cream/20 text-xs hidden sm:block">
             Baghdad · Iraq
           </p>
         </div>
