@@ -130,9 +130,10 @@ export default function ContactSection() {
                   <select
                     name="service"
                     required
+                    defaultValue=""
                     className="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-gold transition-colors text-sm appearance-none"
                   >
-                    <option value="" disabled selected className="text-charcoal">Select Service</option>
+                    <option value="" disabled className="text-charcoal">Select Service</option>
                     <option value="Kitchen Design" className="text-charcoal">Kitchen Design</option>
                     <option value="Bedroom Design" className="text-charcoal">Bedroom Design</option>
                     <option value="Interior Decoration" className="text-charcoal">Interior Decoration</option>
