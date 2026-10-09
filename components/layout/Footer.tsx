@@ -14,14 +14,14 @@ export default function Footer() {
           <div className="lg:col-span-2">
             <div className="flex flex-col leading-none mb-6">
               <span className="text-2xl font-black tracking-tight text-cream">
-                Cucina <span className="text-gold">+</span>
+                Cucina <span className="text-gold lowercase">plus</span>
               </span>
               <span className="text-[9px] font-medium tracking-[0.25em] uppercase text-cream/40 mt-0.5">
                 Premium Interiors
               </span>
             </div>
             <p className="text-cream/50 font-light text-sm leading-relaxed mb-8 max-w-xs">
-              Designing and crafting premium kitchens and interiors in Baghdad since 2018.
+              Designing and crafting premium kitchens and interiors in Baghdad since 2010.
               Made with care, built to last.
             </p>
             <div className="flex gap-2">

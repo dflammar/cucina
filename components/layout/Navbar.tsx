@@ -32,7 +32,7 @@ export default function Navbar() {
           {/* Logo */}
           <Link href="#home" className="flex flex-col leading-none">
             <span className="text-[22px] font-black tracking-tight text-charcoal">
-              Cucina <span className="text-gold">+</span>
+              Cucina <span className="text-gold lowercase">plus</span>
             </span>
             <span className="text-[9px] font-medium tracking-[0.25em] uppercase text-charcoal-light">
               Premium Interiors

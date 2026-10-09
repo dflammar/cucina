@@ -1,23 +1,24 @@
-@import url("https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,700;0,800;1,700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,700;0,800;1,700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap");
 
 @import "tailwindcss";
 
 /* ─── Tailwind v4: Register custom design tokens ─── */
 @theme {
-  /* Brand colors */
-  --color-cream:          #f7f3ed;
-  --color-cream-dark:     #eee8de;
-  --color-cream-mid:      #e4dcd0;
-  --color-charcoal:       #1c1a17;
-  --color-charcoal-mid:   #3d3830;
-  --color-charcoal-light: #7a7168;
-  --color-gold:           #c9a84c;
-  --color-gold-light:     #dbbe72;
-  --color-gold-dark:      #b8952f;
-  --color-sand:           #c8bba8;
+  /* Brand colors - Aligned exactly with Cucina Plus identity */
+  --color-cream:          #ffffff;
+  --color-cream-dark:     #f4f4f5;
+  --color-cream-mid:      #e4e4e7;
+  --color-charcoal:       #111111;
+  --color-charcoal-mid:   #1a1a1a;
+  --color-charcoal-light: #71717a;
+  --color-gold:           #e5eb1e; /* The bright neon/lemon brand yellow */
+  --color-gold-light:     #f0f45f;
+  --color-gold-dark:      #cbcf17;
+  --color-sand:           #d4d4d8;
 
   /* Typography */
   --font-family-sans: "Plus Jakarta Sans", sans-serif;
+  --font-family-serif: "Playfair Display", serif;
 
   /* Border radius */
   --radius-pill: 9999px;
@@ -43,17 +44,17 @@
   }
 
   body {
-    background-color: var(--color-cream);
-    color: var(--color-charcoal);
-    font-family: "Plus Jakarta Sans", sans-serif;
+    background-color: var(--color-charcoal); /* Brand relies heavily on black backgrounds */
+    color: var(--color-cream);
+    font-family: var(--font-family-sans);
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
   }
 
   /* Custom scrollbar */
   ::-webkit-scrollbar { width: 5px; }
-  ::-webkit-scrollbar-track { background: var(--color-cream-dark); }
-  ::-webkit-scrollbar-thumb { background: var(--color-charcoal); border-radius: 3px; }
+  ::-webkit-scrollbar-track { background: var(--color-charcoal); }
+  ::-webkit-scrollbar-thumb { background: var(--color-gold); border-radius: 3px; }
 }
 
 /* ─── Utility classes ─── */

@@ -41,7 +41,7 @@ export default function AdminLoginPage() {
         <div className="text-center mb-12">
           <div className="flex flex-col leading-none">
             <span className="text-4xl font-black text-cream">
-              Cucina <span className="text-gold">+</span>
+              Cucina <span className="text-gold lowercase">plus</span>
             </span>
             <span className="text-[10px] font-bold tracking-[0.25em] uppercase text-cream/40 mt-1.5">
               Admin Panel

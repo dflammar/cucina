@@ -35,7 +35,7 @@ export default function AdminSidebar({ userEmail }: { userEmail: string }) {
       <div className="p-6 border-b border-cream/10">
         <div className="flex flex-col leading-none">
           <span className="text-xl font-black text-cream">
-            Cucina <span className="text-gold">+</span>
+            Cucina <span className="text-gold lowercase">plus</span>
           </span>
           <span className="text-[9px] font-medium tracking-[0.2em] uppercase text-cream/30 mt-0.5">
             Admin Panel
