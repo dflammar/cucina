@@ -57,9 +57,11 @@ export default function ServicesSection() {
                 </h3>
               </div>
               
-              <div className="prose prose-sm md:prose-base prose-p:text-charcoal-light prose-p:leading-relaxed text-center md:text-left">
+              <div className="text-center md:text-left space-y-4 max-w-3xl">
                 {service.description.split('\n\n').map((paragraph, i) => (
-                  <p key={i} className="mb-4">{paragraph}</p>
+                  <p key={i} className="text-sm md:text-base text-charcoal/80 leading-relaxed font-medium">
+                    {paragraph}
+                  </p>
                 ))}
               </div>
             </div>
