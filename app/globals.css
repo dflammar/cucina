@@ -11,9 +11,9 @@
   --color-charcoal:       #111111;
   --color-charcoal-mid:   #1a1a1a;
   --color-charcoal-light: #71717a;
-  --color-gold:           #e5eb1e; /* The bright neon/lemon brand yellow */
-  --color-gold-light:     #f0f45f;
-  --color-gold-dark:      #cbcf17;
+  --color-gold:           #FFDE00; /* Pure bright yellow, no green tint */
+  --color-gold-light:     #FFEB3B;
+  --color-gold-dark:      #E6C800;
   --color-sand:           #d4d4d8;
 
   /* Typography */
