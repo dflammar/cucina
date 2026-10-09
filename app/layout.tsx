@@ -2,22 +2,23 @@ import type { Metadata } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "كوجينا بلس | مطابخ وديكورات فاخرة في بغداد",
+  title: "Cucina Plus | Premium Kitchens & Interiors — Baghdad",
   description:
-    "كوجينا بلس للمطابخ والديكورات المتخصصة في تصميم وتنفيذ المطابخ الحديثة والديكورات الداخلية الفاخرة. فرع المنصور وفرع القاهرة - بغداد، العراق.",
+    "Cucina Plus specialises in designing and installing premium European-inspired kitchens and interior spaces. Founded 2018, Baghdad, Iraq. Two showrooms: Mansour & Cairo branches.",
   keywords: [
-    "مطابخ",
-    "ديكورات داخلية",
-    "كوجينا بلس",
-    "بغداد",
-    "المنصور",
-    "مطابخ فاخرة",
-    "غرف نوم",
+    "kitchen design",
+    "interior design",
+    "Baghdad",
+    "premium kitchens",
+    "bedroom design",
+    "Cucina Plus",
+    "Iraq",
   ],
   openGraph: {
-    title: "كوجينا بلس | مطابخ وديكورات فاخرة",
-    description: "تصميم وتنفيذ المطابخ والديكورات الداخلية الفاخرة في بغداد",
-    locale: "ar_IQ",
+    title: "Cucina Plus | Premium Kitchens & Interiors",
+    description:
+      "European-inspired kitchen design and execution in Baghdad, Iraq.",
+    locale: "en_US",
     type: "website",
   },
 };
@@ -28,7 +29,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="ar" dir="rtl">
+    <html lang="en" dir="ltr">
       <head>
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link
@@ -37,11 +38,11 @@ export default function RootLayout({
           crossOrigin="anonymous"
         />
         <link
-          href="https://fonts.googleapis.com/css2?family=Almarai:wght@300;400;700;800&display=swap"
+          href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,700;0,800;1,700&display=swap"
           rel="stylesheet"
         />
       </head>
-      <body className="font-arabic antialiased">{children}</body>
+      <body className="font-sans antialiased">{children}</body>
     </html>
   );
 }
