@@ -17,10 +17,10 @@ export default async function AdminLayout({
   }
 
   return (
-    <div className="min-h-screen bg-gray-50 flex" dir="rtl">
+    <div className="min-h-screen bg-white text-charcoal flex" dir="ltr">
       <AdminSidebar userEmail={user.email ?? ""} />
-      <main className="flex-1 overflow-auto">
-        <div className="p-8">{children}</div>
+      <main className="flex-1 overflow-auto bg-cream-dark/20">
+        <div className="p-8 max-w-7xl mx-auto">{children}</div>
       </main>
     </div>
   );
