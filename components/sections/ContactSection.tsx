@@ -3,7 +3,7 @@
 import { motion } from "framer-motion";
 import { useState } from "react";
 import { createClient } from "@/lib/supabase/client";
-import { MapPin, Phone, CheckCircle2, Instagram, Facebook } from "lucide-react";
+import { MapPin, Phone, CheckCircle2, Link as LinkIcon, AtSign } from "lucide-react";
 
 export default function ContactSection() {
   const [loading, setLoading] = useState(false);
@@ -78,13 +78,13 @@ export default function ContactSection() {
 
               <div className="flex items-center gap-4 pt-6 border-t border-white/10">
                 <div className="w-10 h-10 rounded-full bg-gold/10 text-gold flex items-center justify-center shrink-0">
-                  <Instagram size={20} />
+                  <AtSign size={20} />
                 </div>
                 <p className="text-sm font-medium text-white/80">cucina._plus</p>
               </div>
               <div className="flex items-center gap-4">
                 <div className="w-10 h-10 rounded-full bg-gold/10 text-gold flex items-center justify-center shrink-0">
-                  <Facebook size={20} />
+                  <LinkIcon size={20} />
                 </div>
                 <p className="text-sm font-medium text-white/80">مطابخ كوجينا بلس</p>
               </div>
