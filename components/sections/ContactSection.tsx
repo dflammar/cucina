@@ -76,18 +76,19 @@ export default function ContactSection() {
                 </div>
               </div>
 
-              <div className="flex items-center gap-4 pt-6 border-t border-white/10">
-                <div className="w-10 h-10 rounded-full bg-gold/10 text-gold flex items-center justify-center shrink-0">
+              <a href="https://www.instagram.com/cucina._plus?stkn=MTJnOWh5NWJjMmVlOQ%3D%3D&utm_source=qr" target="_blank" rel="noopener noreferrer" className="flex items-center gap-4 pt-6 border-t border-white/10 group cursor-pointer">
+                <div className="w-10 h-10 rounded-full bg-gold/10 text-gold flex items-center justify-center shrink-0 group-hover:bg-gold group-hover:text-charcoal transition-colors">
                   <AtSign size={20} />
                 </div>
-                <p className="text-sm font-medium text-white/80">cucina._plus</p>
-              </div>
-              <div className="flex items-center gap-4">
-                <div className="w-10 h-10 rounded-full bg-gold/10 text-gold flex items-center justify-center shrink-0">
+                <p className="text-sm font-medium text-white/80 group-hover:text-gold transition-colors">cucina._plus</p>
+              </a>
+              
+              <a href="https://www.facebook.com/share/1LaWxwJvuX/?mibextid=wwXIfr" target="_blank" rel="noopener noreferrer" className="flex items-center gap-4 group cursor-pointer">
+                <div className="w-10 h-10 rounded-full bg-gold/10 text-gold flex items-center justify-center shrink-0 group-hover:bg-gold group-hover:text-charcoal transition-colors">
                   <LinkIcon size={20} />
                 </div>
-                <p className="text-sm font-medium text-white/80">مطابخ كوجينا بلس</p>
-              </div>
+                <p className="text-sm font-medium text-white/80 group-hover:text-gold transition-colors">مطابخ كوجينا بلس</p>
+              </a>
             </div>
           </div>
 

@@ -21,20 +21,28 @@ export default function Footer() {
               </span>
             </div>
             <p className="text-cream/50 font-light text-sm leading-relaxed mb-8 max-w-xs">
-              Designing and crafting premium kitchens and interiors in Baghdad since 2010.
+              Designing and crafting premium kitchens and interiors in Baghdad since 2018.
               Made with care, built to last.
             </p>
-            <div className="flex gap-2">
-              {["Instagram", "Facebook"].map((s) => (
-                <a
-                  key={s}
-                  href="#"
-                  className="flex items-center gap-1.5 px-3 py-2 border border-cream/15 text-cream/50 hover:border-cream/40 hover:text-cream/80 transition-all duration-200 text-xs font-medium rounded-full"
-                >
-                  <Share2 size={12} />
-                  {s}
-                </a>
-              ))}
+            <div className="flex gap-2 flex-wrap">
+              <a
+                href="https://www.instagram.com/cucina._plus?stkn=MTJnOWh5NWJjMmVlOQ%3D%3D&utm_source=qr"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-1.5 px-3 py-2 border border-cream/15 text-cream/50 hover:border-cream/40 hover:text-cream/80 transition-all duration-200 text-xs font-medium rounded-full"
+              >
+                <Share2 size={12} />
+                Instagram
+              </a>
+              <a
+                href="https://www.facebook.com/share/1LaWxwJvuX/?mibextid=wwXIfr"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-1.5 px-3 py-2 border border-cream/15 text-cream/50 hover:border-cream/40 hover:text-cream/80 transition-all duration-200 text-xs font-medium rounded-full"
+              >
+                <Share2 size={12} />
+                Facebook
+              </a>
             </div>
           </div>
 
